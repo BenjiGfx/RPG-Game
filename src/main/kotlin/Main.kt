@@ -74,15 +74,15 @@ fun main() {
                 if (indexHeld > team.helden.size || indexHeld < 1)
                     throw Exception("Held nicht verfügbar - Try again!")
             } catch (exception: Exception) {
-                println(exception.message)
+                println(exception.message) //Es wird der String der Exeption ausgegeben.
             }
-        } while (indexHeld > team.helden.size || indexHeld < 1)
+        } while (indexHeld > team.helden.size || indexHeld < 1) //Die Bedingung für die do-Schleife für die Exeption.
 
         ausgewählterHeld = team.helden[indexHeld - 1]
 
         println("Inventar = 1\nSkills = 2")
 
-        var auswahl = readln()
+        var auswahl = readln() //Die ausgewählte Option wird eingelesen.
 
         if (auswahl == "1") {
 
@@ -103,13 +103,16 @@ fun main() {
                         throw Exception("Skill nicht verfügbar - Try again!")
                     }
                 } catch (exception: Exception) {
-                    println(exception.message)
+                    println(exception.message) // Es wird der String der Exeption ausgegeben.
                 }
-            } while (indexItem > ausgewählterHeld.item.size || indexItem < 0)
+            } while (indexItem > ausgewählterHeld.item.size || indexItem < 0) // Bedingung der do-Schleife für die Exeption.
 
+            //Item ausgewählt
             ausgewähltesItem = ausgewählterHeld.item[indexItem - 1]
 
             println("-------------------")
+
+            //Das ausgewählte Item wird angewendet.
 
             ausgewählterHeld.useItem(ausgewähltesItem)
 
@@ -123,6 +126,7 @@ fun main() {
 
             println("---------------------------")
 
+            //Wenn der Gegner nicht besiegt ist attackiert er einen zufälligen Helden.
             if (!gegner.wasted()) {
                 gegner.attackieren(gegner.skills.random(), team)
             }
@@ -130,8 +134,9 @@ fun main() {
             //Ist wasted() = true wird der damit angesprochene Held aus meiner Liste entfernt. Kleine Hilfe von ChatGBT war da für die removeIF-Funktion.
             team.helden.removeIf { it.wasted() }  // removeIF habe ich von ChatGBT
 
-        } else if (auswahl == "2")
+        } else if (auswahl == "2") //Die ausgewählte Option wird eingelesen.
 
+        // Skill-Schleife
             try {
 
                 counter = 0
@@ -145,21 +150,25 @@ fun main() {
                 var indexSkill = 0
                 var ausgewählterSkill: Skill
 
+                // Der Index wird eingelesen und es wird eine Fehlermeldung abgefangen.
+
                 do {
                     try {
                         indexSkill = readln().toInt()
                         if (indexSkill > ausgewählterHeld.skills.size || indexSkill < 1) {
-                            throw Exception("Skill nicht verfügbar - Try again!")
+                            throw Exception("Skill nicht verfügbar - Try again!")  //Wenn die Index-Auswahl größer als die Liste oder kleiner als 1 ist -> Falsche Auswahl.
                         }
                     } catch (exception: Exception) {
-                        println(exception.message)
+                        println(exception.message) // String der Exeption wird ausgegeben.
                     }
-                } while (indexSkill > ausgewählterHeld.skills.size || indexSkill < 0)
+                } while (indexSkill > ausgewählterHeld.skills.size || indexSkill < 0) // Bedingung für do-Schleife.
 
+                //Skill wird durch die Eingabe des User aus der Skillliste des jeweiligen Heldes geholt
                 ausgewählterSkill = ausgewählterHeld.skills[indexSkill - 1]
 
                 println("-------------------")
 
+                //Held greift Gegner mit ausgewähltem Skill an.
                 ausgewählterHeld.attackieren(ausgewählterSkill, gegner)
 
                 println("-------------------")
@@ -170,16 +179,17 @@ fun main() {
 
                 println("---------------------------")
 
+                //Wenn der Gegner nicht besiegt ist attackiert er einen zufälligen Helden.
                 if (!gegner.wasted()) {
                     gegner.attackieren(gegner.skills.random(), team)
                 }
+                //Held wird aus der Liste entfernt, wenn er besiegt ist.
                 team.helden.removeIf { it.wasted() }
-            } catch (ex: Exception) {
+            } catch (ex: Exception) {  // Das ist der Catch, für den allgemeine Code vom try für die Skill-Schleife
                 println("try again")
-                while (true)
-                    continue
+                continue
             }
-    } while (true)
+    } while (true) // Das ist die Bedingung für die allgemeine do-Schleife des Spiels, damit der Code ausgeführt wird. Deshalb ist der Boolean auf true gesetzt.
 }
 
 
