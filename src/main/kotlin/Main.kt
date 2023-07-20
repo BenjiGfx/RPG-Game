@@ -163,7 +163,7 @@ fun main() {
                     }
                 } while (indexSkill > ausgewählterHeld.skills.size || indexSkill < 0) // Bedingung für do-Schleife.
 
-                //Skill wird durch die Eingabe des User aus der Skillliste des jeweiligen Heldes geholt
+                //Der Index wird von ausgewähltem Skill wird ausgewählt.
                 ausgewählterSkill = ausgewählterHeld.skills[indexSkill - 1]
 
                 println("-------------------")
@@ -185,9 +185,8 @@ fun main() {
                 }
                 //Held wird aus der Liste entfernt, wenn er besiegt ist.
                 team.helden.removeIf { it.wasted() }
-            } catch (ex: Exception) {  // Das ist der Catch, für den allgemeine Code vom try für die Skill-Schleife
+            } catch (ex: Exception) {  // Das ist der Catch, für den allgemeine Code vom try für die Skill-Schleife.
                 println("try again")
-                continue
             }
     } while (true) // Das ist die Bedingung für die allgemeine do-Schleife des Spiels, damit der Code ausgeführt wird. Deshalb ist der Boolean auf true gesetzt.
 }
